@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const inquirer = require('inquirer');
 
-const options = require('./src/constants/options');
+const { SHOW_FILES, REMOVE_NODE_MODULES, SHOW_DIR_SIZE } = require('./src/constants');
+const menuOptions = require('./src/constants/menuOptions');
 const { showFiles, removeNodeModules, showDirSize } = require('./src/services/filesServices');
 
 async function run() {
@@ -10,17 +11,17 @@ async function run() {
     name: 'selected',
     message: 'Select an option:',
     default: true,
-    choices: options,
+    choices: menuOptions,
   });
 
   switch (selected) {
-    case 'showFiles':
+    case SHOW_FILES:
       showFiles();
       break;
-    case 'removeNodeModules':
+    case REMOVE_NODE_MODULES:
       removeNodeModules();
       break;
-    case 'showDirSize':
+    case SHOW_DIR_SIZE:
       await showDirSize();
       break;
     default:
